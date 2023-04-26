@@ -8,7 +8,7 @@ const Meta: FC<PropsWithChildren<IMeta>> = ({
   description,
 }) => {
   return (
-    <>
+    <div>
       <Head>
         <title>{title ? `${title} | NextPizza` : "NextPizza"}</title>
         {description ? (
@@ -24,7 +24,8 @@ const Meta: FC<PropsWithChildren<IMeta>> = ({
           <meta name="robots" content="noindex, nofollow" />
         )}
       </Head>
-    </>
+      {children}
+    </div>
   );
 };
 

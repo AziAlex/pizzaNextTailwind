@@ -1,6 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import Meta from "../seo/Meta";
 import { IMeta } from "../seo/meta.type";
+import Header from "../header/Header";
 
 const Layout: FC<PropsWithChildren<IMeta>> = ({
   children,
@@ -9,7 +10,10 @@ const Layout: FC<PropsWithChildren<IMeta>> = ({
 }) => {
   return (
     <Meta title={title} description={description}>
-      {children}
+      <div className="wrap">
+        <Header />
+        <main>{children}</main>
+      </div>
     </Meta>
   );
 };
