@@ -5,3 +5,7 @@ export const formatPrice = (price: number) => {
     maximumFractionDigits: 0,
   }).format(price);
 };
+
+export function vId() {
+  return Math.floor(Math.random() * 999999999999).toString();
+}
