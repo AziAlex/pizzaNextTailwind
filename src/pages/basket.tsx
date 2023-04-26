@@ -1,4 +1,5 @@
 import Buy from "@/components/buy/Buy";
+import BuyItems from "@/components/buy/BuyItems";
 import ClearBasket from "@/components/buy/ClearBasket";
 import Price from "@/components/buy/Price";
 import Layout from "@/components/layout/Laout";
@@ -7,10 +8,11 @@ import React from "react";
 const basket = () => {
   return (
     <Layout>
-      <div className=" max-w-3xl m-auto">
+      <div className=" max-w-3xl m-auto flex flex-col gap-6">
         <ClearBasket />
-        {/* <Price /> */}
-        {/* <Buy /> */}
+        <BuyItems />
+        <Price />
+        <Buy />
       </div>
     </Layout>
   );
