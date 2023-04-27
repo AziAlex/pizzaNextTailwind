@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PizzaItem from "./Item";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -8,11 +8,12 @@ const Items: React.FC = () => {
   const newSortPizza = useSelector(
     (state: RootState) => state.newPizzaList.allPizza
   );
+  const states = useSelector((state: RootState) => state.sorts.sort);
 
-  setTimeout(() => {
+  useEffect(() => {
     const typePuzza = document.querySelector(".active")?.textContent;
     setValue(`${typePuzza} пиццы`);
-  });
+  }, [states]);
 
   return (
     <main>

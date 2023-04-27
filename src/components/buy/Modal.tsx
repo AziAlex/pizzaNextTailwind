@@ -15,7 +15,7 @@ const Modal: React.FC<typeModal> = ({ setActiveModal, activeModal }) => {
       onClick={() => setActiveModal(false)}
       className={
         activeModal
-          ? "absolute bg-black bg-opacity-50 w-screen h-screen top-0 left-0"
+          ? "fixed z-50 bg-black bg-opacity-50 w-screen h-screen top-0 left-0"
           : "hidden"
       }
     >
@@ -25,13 +25,13 @@ const Modal: React.FC<typeModal> = ({ setActiveModal, activeModal }) => {
         </h2>
         <div className="flex justify-around font-bold">
           <button
-            className="border-2 border-orange-500  py-2 px-4 rounded-md hover:bg-orange-500 hover:text-white"
+            className="border-2 border-orange-500  py-2 px-4 rounded-md duration-200 hover:bg-orange-500 hover:text-white"
             onClick={() => setActiveModal(false)}
           >
             НЕТ
           </button>
           <button
-            className="border-2 border-orange-500 py-2 px-4 rounded-md hover:bg-orange-500 hover:text-white"
+            className="border-2 border-orange-500 py-2 px-4 rounded-md duration-200 hover:bg-orange-500 hover:text-white"
             onClick={() => {
               setActiveModal(false);
               dispatch(deleteAllItems());

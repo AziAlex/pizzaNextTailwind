@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
 import { formatPrice } from "@/utils/formatValue";
 import {
@@ -155,4 +155,4 @@ const PizzaItem: React.FC<IPizza> = ({ url, name, type, width, price, id }) => {
   );
 };
 
-export default PizzaItem;
+export default memo(PizzaItem);
