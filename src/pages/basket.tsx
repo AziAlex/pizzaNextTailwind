@@ -7,7 +7,7 @@ import React from "react";
 
 const basket = () => {
   return (
-    <Layout>
+    <Layout title="Корзина" description="Корзина товаров">
       <div className=" max-w-3xl m-auto flex flex-col gap-6">
         <ClearBasket />
         <BuyItems />

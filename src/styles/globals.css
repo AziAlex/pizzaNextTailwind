@@ -19,6 +19,7 @@ li {
   margin: auto;
   background: #fff;
   width: 60%;
+  margin-bottom: 45px;
 }
 
 @media (max-width: 1600px) {
@@ -39,6 +40,7 @@ li {
   .wrap {
     width: 100%;
     min-height: 100vh;
+    margin-bottom: 0;
   }
 }
 
