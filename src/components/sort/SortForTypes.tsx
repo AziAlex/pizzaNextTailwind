@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useAppDispatch, useAppSelector } from "@/hook";
 import { IsortItem } from "@/redux/sortPizza/sort.types";
-import { Sort } from "@/redux/sortPizza/sortSlice";
+import { SortTypePizza } from "@/redux/sortPizza/sortSlice";
 import { setActiveLink } from "@/redux/sortPizza/sortActiveSlice";
 
 const pizzaSortTypes = [
@@ -18,7 +18,7 @@ const SortForTypes: FC = () => {
   const sortActive: IsortItem[] = Object.values(sortBar);
 
   const sortHandler = (id: number, type: string) => {
-    dispatch(Sort(type));
+    dispatch(SortTypePizza(type));
     dispatch(setActiveLink(id));
   };
 

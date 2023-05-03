@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { IPizza } from "@/types/pizzaType";
 import { PizzaService } from "@/services/PizzaService";
+import { sortABC, sortCBA } from "@/utils/sort";
 
 export const fetchPizza = createAsyncThunk("pizzas/fetchPizzas", async () => {
   const data = await PizzaService.getAll();
@@ -23,7 +24,7 @@ export const sortSlice = createSlice({
   name: "sortPizza",
   initialState,
   reducers: {
-    Sort: (state, action: PayloadAction<string>) => {
+    SortTypePizza: (state, action: PayloadAction<string>) => {
       const type = action.payload;
       const { allPizza } = state;
 
@@ -45,45 +46,35 @@ export const sortSlice = createSlice({
           break;
       }
     },
-    SortABC: (state) => {
-      state.filterPizza = state.filterPizza.sort((a, b) => {
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-      });
-    },
-    SortCBA: (state) => {
-      state.filterPizza = state.filterPizza.sort((a, b) => {
-        if (b.name < a.name) return -1;
-        if (b.name > a.name) return 1;
-        return 0;
-      });
-    },
-    Sort123: (state) => {
-      state.filterPizza = state.filterPizza.sort((a, b) => a.price - b.price);
-    },
-    Sort321: (state) => {
-      state.filterPizza = state.filterPizza.sort((a, b) => b.price - a.price);
+    SortAmountAndAlphabet: (state, action: PayloadAction<string>) => {
+      const str = action.payload;
+      const { filterPizza } = state;
+
+      switch (true) {
+        case str === "ABC":
+          state.filterPizza = sortABC(filterPizza);
+          break;
+        case str === "CBA":
+          state.filterPizza = sortCBA(filterPizza);
+          break;
+        case str === "123":
+          state.filterPizza = filterPizza.sort((a, b) => a.price - b.price);
+          break;
+        case str === "321":
+          state.filterPizza = filterPizza.sort((a, b) => b.price - a.price);
+          break;
+      }
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPizza.fulfilled, (state, action) => {
       if (state.allPizza.length) return;
-
       state.allPizza = action.payload;
       state.filterPizza = action.payload;
     });
   },
 });
 
-export const { Sort } = sortSlice.actions;
-
-const { SortABC, SortCBA, Sort123, Sort321 } = sortSlice.actions;
-export const sortPrices = {
-  SortABC,
-  SortCBA,
-  Sort123,
-  Sort321,
-};
+export const { SortTypePizza, SortAmountAndAlphabet } = sortSlice.actions;
 
 export default sortSlice.reducer;
