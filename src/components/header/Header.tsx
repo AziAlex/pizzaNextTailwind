@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC } from "react";
 import Logo from "./subComponents/Logo";
 import { useRouter } from "next/router";
 import Basket from "./subComponents/Basket";

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PizzaItem from "./Item";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useAppSelector } from "@/hook";
 
 const Items: React.FC = () => {
   const [value, setValue] = useState<string>("Все пиццы");
-  const newSortPizza = useSelector(
-    (state: RootState) => state.newPizzaList.allPizza
+  const newSortPizza = useAppSelector(
+    (state) => state.newPizzaList.filterPizza
   );
-  const states = useSelector((state: RootState) => state.sorts.sort);
+
+  const states = useAppSelector((state) => state.sorts.sort);
 
   useEffect(() => {
     const typePuzza = document.querySelector(".active")?.textContent;

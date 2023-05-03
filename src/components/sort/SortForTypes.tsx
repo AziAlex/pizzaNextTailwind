@@ -1,60 +1,40 @@
 import React, { FC } from "react";
-import { RootState } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/hook";
+import { IsortItem } from "@/redux/sortPizza/sort.types";
+import { Sort } from "@/redux/sortPizza/sortSlice";
 import { setActiveLink } from "@/redux/sortPizza/sortActiveSlice";
-import { sortTypes } from "@/redux/sortPizza/sortSlice";
-import { useDispatch, useSelector } from "react-redux";
+
+const pizzaSortTypes = [
+  { id: 1, name: "все", type: "all" },
+  { id: 2, name: "мясные", type: "meat" },
+  { id: 3, name: "вегетарианская", type: "vega" },
+  { id: 4, name: "гриль", type: "gril" },
+  { id: 5, name: "острые", type: "sharp" },
+];
 
 const SortForTypes: FC = () => {
-  const dispatch = useDispatch();
-  const sortBar = useSelector((state: RootState) => state.sorts.sort);
+  const dispatch = useAppDispatch();
+  const sortBar = useAppSelector((state) => state.sorts.sort);
+  const sortActive: IsortItem[] = Object.values(sortBar);
+
+  const sortHandler = (id: number, type: string) => {
+    dispatch(Sort(type));
+    dispatch(setActiveLink(id));
+  };
 
   return (
     <ul className="flex py-2 overflow-auto pb-3">
-      <li
-        onClick={() => {
-          dispatch(setActiveLink(sortBar.link1.id)),
-            dispatch(sortTypes.SortDefault());
-        }}
-        className={sortBar.link1.select ? "active sort-item" : "sort-item"}
-      >
-        Все
-      </li>
-      <li
-        onClick={() => {
-          dispatch(setActiveLink(sortBar.link2.id)),
-            dispatch(sortTypes.SortMeat());
-        }}
-        className={sortBar.link2.select ? "active sort-item" : "sort-item"}
-      >
-        Мясные
-      </li>
-      <li
-        onClick={() => {
-          dispatch(setActiveLink(sortBar.link3.id)),
-            dispatch(sortTypes.SortVegetarian());
-        }}
-        className={sortBar.link3.select ? "active sort-item" : "sort-item"}
-      >
-        Вегетарианская
-      </li>
-      <li
-        onClick={() => {
-          dispatch(setActiveLink(sortBar.link4.id)),
-            dispatch(sortTypes.SortGrill());
-        }}
-        className={sortBar.link4.select ? "active sort-item" : "sort-item"}
-      >
-        Гриль
-      </li>
-      <li
-        onClick={() => {
-          dispatch(setActiveLink(sortBar.link5.id)),
-            dispatch(sortTypes.Sortsharp());
-        }}
-        className={sortBar.link5.select ? "active sort-item" : "sort-item"}
-      >
-        Острые
-      </li>
+      {pizzaSortTypes.map(({ id, name, type }, index) => (
+        <li
+          key={id}
+          className={
+            sortActive[index].select ? "active sort-item" : "sort-item"
+          }
+          onClick={() => sortHandler(id, type)}
+        >
+          {name}
+        </li>
+      ))}
     </ul>
   );
 };

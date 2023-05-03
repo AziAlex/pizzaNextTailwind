@@ -34,3 +34,7 @@ export interface PizzaState {
   price: number;
   tottalPrice: number;
 }
+
+export interface ISortType {
+  type: "all" | "meat" | "vega" | "gril" | "sharp";
+}
