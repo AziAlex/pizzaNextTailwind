@@ -1,6 +1,4 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/redux/store";
 import { formatPrice } from "@/utils/formatValue";
 import {
   removeItem,
@@ -8,10 +6,11 @@ import {
   decrementCount,
 } from "@/redux/buySlice/buySlice";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/hook";
 
 const BuyItems: React.FC = () => {
-  const dispatch = useDispatch();
-  const items = useSelector((state: RootState) => state.buyBasket.buyItems);
+  const dispatch = useAppDispatch();
+  const items = useAppSelector((state) => state.buyBasket.buyItems);
 
   return (
     <ul className="items-block">

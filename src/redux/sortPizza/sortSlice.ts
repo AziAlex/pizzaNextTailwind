@@ -28,20 +28,20 @@ export const sortSlice = createSlice({
       const type = action.payload;
       const { allPizza } = state;
 
-      switch (true) {
-        case type === "all":
+      switch (type) {
+        case "all":
           state.filterPizza = allPizza;
           break;
-        case type === "meat":
+        case "meat":
           state.filterPizza = allPizza.filter(({ types }) => types === type);
           break;
-        case type === "vega":
+        case "vega":
           state.filterPizza = allPizza.filter(({ types }) => types === type);
           break;
-        case type === "gril":
+        case "gril":
           state.filterPizza = allPizza.filter(({ types }) => types === type);
           break;
-        case type === "sharp":
+        case "sharp":
           state.filterPizza = allPizza.filter(({ types }) => types === type);
           break;
       }
@@ -50,17 +50,17 @@ export const sortSlice = createSlice({
       const str = action.payload;
       const { filterPizza } = state;
 
-      switch (true) {
-        case str === "ABC":
+      switch (str) {
+        case "ABC":
           state.filterPizza = sortABC(filterPizza);
           break;
-        case str === "CBA":
+        case "CBA":
           state.filterPizza = sortCBA(filterPizza);
           break;
-        case str === "123":
+        case "123":
           state.filterPizza = filterPizza.sort((a, b) => a.price - b.price);
           break;
-        case str === "321":
+        case "321":
           state.filterPizza = filterPizza.sort((a, b) => b.price - a.price);
           break;
       }

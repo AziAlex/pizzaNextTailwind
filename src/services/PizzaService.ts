@@ -8,4 +8,8 @@ export const PizzaService = {
     const { data } = await axios.get<IPizza[]>("/api/pizzas");
     return data;
   },
+  async getById(id: string) {
+    const { data } = await axios.get<IPizza[]>(`/api/pizzas/${id}`);
+    return data;
+  },
 };

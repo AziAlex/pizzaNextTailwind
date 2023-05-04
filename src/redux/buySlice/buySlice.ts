@@ -44,7 +44,7 @@ const buyState = createSlice({
       state.buyItems.splice(0);
     },
     incrementCount: (state, action: PayloadAction<PizzaState>) => {
-      const { id, count } = action.payload;
+      const { id } = action.payload;
 
       const item = state.buyItems.find((item) => item.id === id);
 
@@ -54,7 +54,7 @@ const buyState = createSlice({
       }
     },
     decrementCount: (state, action: PayloadAction<PizzaState>) => {
-      const { id, count } = action.payload;
+      const { id } = action.payload;
 
       const item = state.buyItems.find((item) => item.id === id);
 

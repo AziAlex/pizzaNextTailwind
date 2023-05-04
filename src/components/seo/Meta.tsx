@@ -6,27 +6,25 @@ const Meta: FC<PropsWithChildren<IMeta>> = ({
   children,
   title,
   description,
-}) => {
-  return (
-    <div>
-      <Head>
-        <title>{title ? `${title} | NextPizza` : "NextPizza"}</title>
-        {description ? (
-          <>
-            <meta name="description" content={description} />
-            <meta
-              name="og:title"
-              content={title ? `${title} | NextPizza` : "NextPizza"}
-            />
-            <meta name="og:description" content={description} />
-          </>
-        ) : (
-          <meta name="robots" content="noindex, nofollow" />
-        )}
-      </Head>
-      {children}
-    </div>
-  );
-};
+}) => (
+  <div>
+    <Head>
+      <title>{title ? `${title} | NextPizza` : "NextPizza"}</title>
+      {description ? (
+        <>
+          <meta name="description" content={description} />
+          <meta
+            name="og:title"
+            content={title ? `${title} | NextPizza` : "NextPizza"}
+          />
+          <meta name="og:description" content={description} />
+        </>
+      ) : (
+        <meta name="robots" content="noindex, nofollow" />
+      )}
+    </Head>
+    {children}
+  </div>
+);
 
 export default Meta;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, memo } from "react";
-import { useDispatch } from "react-redux";
 import { formatPrice } from "@/utils/formatValue";
 import {
   ISise,
@@ -10,13 +9,15 @@ import {
 } from "../../types/pizzaType";
 import { addItem } from "@/redux/buySlice/buySlice";
 import Image from "next/image";
+import { useAppDispatch } from "@/hook";
+import { newPizzaTypeSize } from "@/utils/utils";
 
 const PizzaItem: React.FC<IPizza> = ({ url, name, type, width, price, id }) => {
   const [typePizza, setTypePizza] = useState<IType>({ ...type });
   const [widthPizza, setWidthPizza] = useState<ISise>({ ...width });
   const [typesPizza, setTypesPizza] = useState<number>(0);
   const [sisePizza, setSisePizza] = useState<number>(0);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const pzType: WidthSise = newPizzaTypeSize(typePizza);
   const pzSise: WidthSise = newPizzaTypeSize(widthPizza);
 
@@ -31,44 +32,19 @@ const PizzaItem: React.FC<IPizza> = ({ url, name, type, width, price, id }) => {
     tottalPrice: typesPizza + sisePizza + price,
   };
 
-  const typePyzzaHandler = (spanState: number) => {
-    setTypePizza({
-      select1: {
-        id: 1,
-        select: spanState === 1 ? true : false,
-        value: type.select1.value,
-      },
-      select2: {
-        id: 2,
-        select: spanState === 2 ? true : false,
-        value: type.select2.value,
-      },
-    });
+  const typePyzzaHandler = (id: number) => {
+    setTypePizza((prev) => ({
+      select1: { ...prev.select1, select: id === 1 ? true : false },
+      select2: { ...prev.select2, select: id === 2 ? true : false },
+    }));
   };
-  const widthPyzzaHandler = (spanState: number) => {
-    setWidthPizza({
-      select1: {
-        id: 1,
-        select: spanState === 1 ? true : false,
-        value: width.select1.value,
-      },
-      select2: {
-        id: 2,
-        select: spanState === 2 ? true : false,
-        value: width.select2.value,
-      },
-      select3: {
-        id: 3,
-        select: spanState === 3 ? true : false,
-        value: width.select3.value,
-      },
-    });
+  const widthPyzzaHandler = (id: number) => {
+    setWidthPizza((prev) => ({
+      select1: { ...prev.select1, select: id === 1 ? true : false },
+      select2: { ...prev.select2, select: id === 2 ? true : false },
+      select3: { ...prev.select3, select: id === 3 ? true : false },
+    }));
   };
-
-  function newPizzaTypeSize(obj: ISise | IType) {
-    const truePrice = Object.entries(obj).map((i) => i);
-    return truePrice.find((i) => i[1].select === true)?.[1];
-  }
 
   useEffect(() => {
     newPrice();

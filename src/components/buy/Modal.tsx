@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { deleteAllItems } from "@/redux/buySlice/buySlice";
+import { useAppDispatch } from "@/hook";
 
 interface typeModal {
   activeModal: boolean;
@@ -8,7 +8,7 @@ interface typeModal {
 }
 
 const Modal: React.FC<typeModal> = ({ setActiveModal, activeModal }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div

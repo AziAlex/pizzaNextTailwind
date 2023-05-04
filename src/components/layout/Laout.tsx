@@ -7,15 +7,13 @@ const Layout: FC<PropsWithChildren<IMeta>> = ({
   children,
   title,
   description,
-}) => {
-  return (
-    <Meta title={title} description={description}>
-      <div className="wrap rounded-none lg:rounded-3xl">
-        <Header />
-        <main>{children}</main>
-      </div>
-    </Meta>
-  );
-};
+}) => (
+  <Meta title={title} description={description}>
+    <div className="wrap rounded-none lg:rounded-3xl">
+      <Header />
+      <main>{children}</main>
+    </div>
+  </Meta>
+);
 
 export default Layout;
